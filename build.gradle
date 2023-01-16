@@ -1,6 +1,10 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
+
+mainClassName = 'de.ichibati.officebutler.Main'
 
 group 'org.example'
 version '1.0-SNAPSHOT'
@@ -12,6 +16,13 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.apache.pdfbox:pdfbox:3.0.0-alpha3'
+    implementation 'joda-time:joda-time:2.12.1'
+}
+
+javafx{
+    version = "19"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 test {

@@ -11,15 +11,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class InvoiceMetaExtractor {
+public class InvoiceDataExtractor {
 
 
     private final PDDocument invoice;
     private final String[] invoiceData;
-
     private final Map<String, Integer> monthNameToNumber;
 
-    public InvoiceMetaExtractor(PDDocument invoice) throws IOException {
+    public InvoiceDataExtractor(PDDocument invoice) throws IOException {
 
         this.invoice = invoice;
         invoiceData = new PDFTextStripper().getText(new PageExtractor(invoice, 1, 1).extract()).split("\n");
@@ -47,8 +46,8 @@ public class InvoiceMetaExtractor {
         Pattern pattern = Pattern.compile("(.+) (20[0-9][0-9])(?:(?: Korrektur in )(0[1-9]|1[0-2]).(20[0-9][0-9]))?");
         Matcher matcher = pattern.matcher(dateOfInvoice);
 
-        int month = 1, year = 1;
-        int correctionMonth = 0, correctionYear = 0;
+        int month, year;
+        int correctionMonth, correctionYear;
         LocalDate[] dates = new LocalDate[2];
 
         if(matcher.matches()) {
@@ -63,6 +62,8 @@ public class InvoiceMetaExtractor {
             dates[1] = new LocalDate(correctionYear, correctionMonth, 1);
         }
 
+        // LocalDate[0] == Dates of Invoice
+        // LocalDate[1] == Dates of Correction
         return dates;
 
 
@@ -76,7 +77,9 @@ public class InvoiceMetaExtractor {
 
     }
 
-
+    public String getEmployeeSalutation(){
+        return invoiceData[3].trim().equals("Herrn") ? "Herr" : "Frau";
+    }
 
     public String getNameofEmployee(){
         return (invoiceData[4].trim());
