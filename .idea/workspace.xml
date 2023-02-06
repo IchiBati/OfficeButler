@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ee97523-cd8d-405f-8f57-ec46c3584df1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/EmployeeFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/SharedEmployeeDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/gui.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Invoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/InvoiceDataExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/InvoiceDataExtractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Invoices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Invoices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/PdfDemoMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/ichibati/officebutler/PdfDemoMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +59,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -92,20 +84,20 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-18&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/IchiBati/Documents/Coding/Frameworks/joda-time-2.12.2.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/IchiBati/Documents/Coding/Frameworks/openjfx-19.0.2_windows-x64_bin-sdk/javafx-sdk-19.0.2/lib&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.language&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.PdfDemoMain">
+  <component name="RunManager" selected="Gradle.OfficeButler [run]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.ichibati.officebutler.Main" />
       <module name="OfficeButler.main" />
@@ -158,7 +150,7 @@
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -167,7 +159,7 @@
             <option value="run" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
@@ -195,6 +187,13 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.PdfDemoMain" />
+      <item itemvalue="Gradle.OfficeButler [dependencies]" />
+      <item itemvalue="Gradle.OfficeButler [run]" />
+      <item itemvalue="Gradle.OfficeButler [test]" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.OfficeButler [run]" />
@@ -223,6 +222,13 @@
       <workItem from="1673644614787" duration="11089000" />
       <workItem from="1673722469093" duration="17006000" />
       <workItem from="1673807148700" duration="7835000" />
+      <workItem from="1674080358160" duration="594000" />
+      <workItem from="1674121514582" duration="1065000" />
+      <workItem from="1674261356083" duration="49000" />
+      <workItem from="1674411259194" duration="23000" />
+      <workItem from="1675526343175" duration="5711000" />
+      <workItem from="1675536931367" duration="3721000" />
+      <workItem from="1675710168448" duration="8509000" />
     </task>
     <servers />
   </component>
