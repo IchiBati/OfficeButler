@@ -2,11 +2,13 @@ package de.ichibati.officebutler;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import de.ichibati.officebutler.Main;
 
 
 public class Employee {
@@ -81,7 +83,11 @@ public class Employee {
     public boolean invoicesToFile(){
         for (Invoice invoice : invoicesOfEmployee){
             try {
-                invoice.getInvoiceAsPDF().save(Path.of(System.getProperty("user.home"), "Documents", "Abrechnungen", invoice.getFilename()).toFile());
+                File inputFile = Main.getInputFile();
+                Path p = inputFile.toPath().getParent();
+                File outputFile = Path.of((p.toString() + File.separator + "Abrechnungen" + File.separator + invoice.getFilename())).toFile();
+                outputFile.getParentFile().mkdirs();
+                invoice.getInvoiceAsPDF().save(outputFile);
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;

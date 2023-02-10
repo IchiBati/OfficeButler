@@ -3,27 +3,22 @@ package de.ichibati.officebutler;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class Main extends Application {
 
-    private File file;
+    private static File inputFile;
     private Invoices invoices;
 
     public static void main(String[] args) {
@@ -64,19 +59,9 @@ public class Main extends Application {
         Button openButton = new Button("Open...");
         openButton.setMinWidth(60);
 
-
-
-
-
         Button convertButton = new Button("Convert");
         convertButton.setPrefWidth(160);
         convertButton.setDisable(true);
-
-
-
-
-
-
 
         hBox.getChildren().addAll(openButton, convertButton);
         vBox.getChildren().addAll(statusLabel, urlField, hBox, progressBar);
@@ -84,19 +69,19 @@ public class Main extends Application {
         root.add(vBox, 0, 0);
         root.add(tableView, 1, 0);
 
-
-
         openButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 statusLabel.setText("");
-                file = fileChooser.showOpenDialog(stage);
+                inputFile = fileChooser.showOpenDialog(stage);
 
-                if(file != null){
+                if(inputFile != null){
                     try {
-                        invoices = new Invoices(file);
+
+                        invoices = new Invoices(inputFile);
                         convertButton.setDisable(false);
-                        urlField.setText(file.getName());
+                        urlField.setText(inputFile.getName());
+
 
 
                     } catch (IOException e) {
@@ -126,8 +111,7 @@ public class Main extends Application {
                     statusLabel.setText("Error: Converting failed");
 
                 }finally {
-                    convertButton.setDisable(false);
-                    convertButton.setDisable(false);
+                    openButton.setDisable(false);
                 }
             }
         });
@@ -150,5 +134,9 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
 
+    }
+
+    public static File getInputFile(){
+        return inputFile;
     }
 }
