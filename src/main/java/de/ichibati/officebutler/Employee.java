@@ -4,6 +4,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,12 +19,6 @@ public class Employee {
     private String lastname;
     private LocalDate dayOfBirth;
     private Address address;
-
-
-    public List<Invoice> getInvoicesOfEmployee() {
-        return invoicesOfEmployee;
-    }
-
     private List<Invoice> invoicesOfEmployee;
 
 
@@ -80,14 +75,17 @@ public class Employee {
         return ID;
     }
 
-    public boolean invoicesToFile(){
+    public List<Invoice> getInvoicesOfEmployee() {
+        return invoicesOfEmployee;
+    }
+
+    public boolean invoicesToFile(Path path){
         for (Invoice invoice : invoicesOfEmployee){
             try {
-                File inputFile = Main.getInputFile();
-                Path p = inputFile.toPath().getParent();
-                File outputFile = Path.of((p.toString() + File.separator + "Abrechnungen" + File.separator + invoice.getFilename())).toFile();
-                outputFile.getParentFile().mkdirs();
-                invoice.getInvoiceAsPDF().save(outputFile);
+                Path outputFolder = Path.of(path.getParent().toString() + File.separator + "Abrechnungen");
+                Path outputFile = Path.of(outputFolder.toString() + File.separator + invoice.getFilename());
+                Files.createDirectories(outputFolder);
+                invoice.getInvoiceAsPDF().save(outputFile.toFile());
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -95,6 +93,8 @@ public class Employee {
         }
         return true;
     }
+
+
 
 
     @Override

@@ -4,13 +4,17 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.joda.time.LocalDate;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class Invoice {
+
+    private static final int CORRECTION_DATE = 1;
+    private static final int INVOICE_DATE = 0;
 
     private PDDocument invoiceAsPDF;
     private final LocalDate dateOfInvoice;
     private LocalDate dateOfCorrection;
-    private  boolean isCorrection;
+    private boolean isCorrection;
     private String filename;
 
     public Invoice(PDDocument employeeInvoicePDF) throws IOException {
@@ -19,7 +23,8 @@ public class Invoice {
 
         invoiceAsPDF = employeeInvoicePDF;
 
-        dateOfInvoice = extractor.getDateOfInvoice()[0];
+        dateOfInvoice = extractor.getDateOfInvoice()[INVOICE_DATE];
+
 
         StringBuilder filenameBuilder = new StringBuilder().append(extractor.getNameofEmployee())
                 .append(" Abrechnung ")
@@ -31,7 +36,7 @@ public class Invoice {
         if(extractor.getIsCorrection()){
 
             isCorrection = true;
-            dateOfCorrection = extractor.getDateOfInvoice()[1];
+            dateOfCorrection = extractor.getDateOfInvoice()[CORRECTION_DATE];
 
             filenameBuilder
                     .append(" (Korrektur ")
@@ -57,6 +62,10 @@ public class Invoice {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public String getMonthAsString(){
+        return dateOfInvoice.toString("MMMM yyyy");
     }
 
 

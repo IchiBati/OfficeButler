@@ -7,8 +7,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,14 +17,24 @@ import java.util.regex.Pattern;
 public class Invoices {
 
     private PDDocument pdfFile;
-    private List<PDDocument> splittedInvoices;
+    private List<PDDocument> pagesOfInputInvoice;
     private int numberOfPages;
+    private Path invoiceFilePath;
+    public String monthOfInvoice;
 
 
-    public Invoices(File file) throws IOException {
+    public Invoices(Path inputFile) throws NoInvoiceException {
 
-        pdfFile = Loader.loadPDF(file);
-        numberOfPages = pdfFile.getNumberOfPages();
+
+        try{
+            invoiceFilePath = inputFile;
+            pdfFile = Loader.loadPDF(invoiceFilePath.toFile());
+            numberOfPages = pdfFile.getNumberOfPages();
+
+        }catch (IOException e){
+            throw new NoInvoiceException(invoiceFilePath, e.getMessage());
+        }
+
 
     }
 
@@ -32,16 +42,16 @@ public class Invoices {
         return pdfFile;
     }
 
-    public List<PDDocument> splitInvoices() throws IOException{
+    public List<PDDocument> splitInPages() throws IOException{
 
-        splittedInvoices = new Splitter().split(pdfFile);
+        pagesOfInputInvoice = new Splitter().split(pdfFile);
         PDFTextStripper stripper = new PDFTextStripper();
         PageExtractor extractor = new PageExtractor(pdfFile);
         List<PDDocument> mergedPagesOfEmployees = new ArrayList<>();
 
-        for (int i = 0 ; i < numberOfPages; ){
+        for (int i = 0 ; i < numberOfPages; i++){
 
-            String pageText = stripper.getText(splittedInvoices.get(i));
+            String pageText = stripper.getText(pagesOfInputInvoice.get(i));
             Pattern pattern = Pattern.compile("Seite 1 von ([1-9]+)");
             Matcher matcher = pattern.matcher(pageText);
 
@@ -59,11 +69,7 @@ public class Invoices {
     }
 
 
-
-
-
-
-
-
-
+    public String getMonthOfInvoice() {
+        return monthOfInvoice;
+    }
 }

@@ -18,7 +18,7 @@ import java.nio.file.Path;
 
 public class Main extends Application {
 
-    private static File inputFile;
+    private Path inputFile;
     private Invoices invoices;
 
     public static void main(String[] args) {
@@ -56,8 +56,8 @@ public class Main extends Application {
 
         TableView<Employee> tableView = new TableView<>();
 
-        Button openButton = new Button("Open...");
-        openButton.setMinWidth(60);
+        Button openButton = new Button("Open..");
+        openButton.setMinWidth(65);
 
         Button convertButton = new Button("Convert");
         convertButton.setPrefWidth(160);
@@ -67,25 +67,25 @@ public class Main extends Application {
         vBox.getChildren().addAll(statusLabel, urlField, hBox, progressBar);
 
         root.add(vBox, 0, 0);
-        root.add(tableView, 1, 0);
+        //root.add(tableView, 1, 0);
 
         openButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 statusLabel.setText("");
-                inputFile = fileChooser.showOpenDialog(stage);
+                inputFile = fileChooser.showOpenDialog(stage).toPath();
 
                 if(inputFile != null){
                     try {
 
                         invoices = new Invoices(inputFile);
                         convertButton.setDisable(false);
-                        urlField.setText(inputFile.getName());
+                        urlField.setText(inputFile.getFileName().toString());
 
 
 
-                    } catch (IOException e) {
-                        statusLabel.setText("Error: Open file failed");
+                    } catch (NoInvoiceException e) {
+                        statusLabel.setText(e.getMessage());
                         convertButton.setDisable(true);
                     }
                 }
@@ -100,11 +100,11 @@ public class Main extends Application {
                 convertButton.setDisable(true);
                 openButton.setDisable(true);
                 try {
-                    for(PDDocument files : invoices.splitInvoices()){
+                    for(PDDocument files : invoices.splitInPages()){
                         EmployeeFactory.createEmployee(files);
                     }
 
-                    SharedEmployeeDatabase.getInstance().getDatabase().forEach(Employee::invoicesToFile);
+                    SharedEmployeeDatabase.getInstance().getDatabase().forEach(e -> e.invoicesToFile(inputFile));
                     statusLabel.setText("Converting succeed!");
 
                 } catch (IOException e) {
@@ -136,7 +136,7 @@ public class Main extends Application {
 
     }
 
-    public static File getInputFile(){
+    public  Path getInputFile(){
         return inputFile;
     }
 }

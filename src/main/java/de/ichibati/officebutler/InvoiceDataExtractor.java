@@ -5,6 +5,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.joda.time.LocalDate;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -12,6 +13,8 @@ import java.util.regex.Pattern;
 
 
 public class InvoiceDataExtractor {
+
+
 
 
     private final PDDocument invoice;
@@ -94,6 +97,9 @@ public class InvoiceDataExtractor {
         return 1;
     }
 
+    public String getMonthAsString(){
+        return invoiceData[7].trim();
+    }
 
 
 
