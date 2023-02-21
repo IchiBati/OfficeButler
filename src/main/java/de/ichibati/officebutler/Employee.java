@@ -79,9 +79,10 @@ public class Employee {
     }
 
     public boolean invoicesToFile(Path path){
+        String fileFolderName = MyApp.inputFile.getFileName().toString().replaceFirst("[.][^.]+$", "");
         for (Invoice invoice : invoicesOfEmployee){
             try {
-                Path outputFolder = Path.of(path.getParent().toString() + File.separator + "Abrechnungen");
+                Path outputFolder = Path.of(path.getParent().toString() + File.separator + fileFolderName);
                 Path outputFile = Path.of(outputFolder.toString() + File.separator + invoice.getFilename());
                 Files.createDirectories(outputFolder);
                 invoice.getInvoiceAsPDF().save(outputFile.toFile());

@@ -35,7 +35,6 @@ public class Invoices {
             throw new NoInvoiceException(invoiceFilePath, e.getMessage());
         }
 
-
     }
 
     public PDDocument getPdfFile() {
@@ -49,7 +48,7 @@ public class Invoices {
         PageExtractor extractor = new PageExtractor(pdfFile);
         List<PDDocument> mergedPagesOfEmployees = new ArrayList<>();
 
-        for (int i = 0 ; i < numberOfPages; i++){
+        for (int i = 0 ; i < numberOfPages;){
 
             String pageText = stripper.getText(pagesOfInputInvoice.get(i));
             Pattern pattern = Pattern.compile("Seite 1 von ([1-9]+)");

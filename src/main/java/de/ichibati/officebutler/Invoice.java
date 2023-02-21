@@ -27,9 +27,9 @@ public class Invoice {
 
 
         StringBuilder filenameBuilder = new StringBuilder().append(extractor.getNameofEmployee())
-                .append(" Abrechnung ")
-                .append(dateOfInvoice.getMonthOfYear())
-                .append(".")
+                .append(" Lohnabrechnung ")
+                .append(dateOfInvoice.toString("MMMM"))
+                .append(" ")
                 .append(dateOfInvoice.getYear());
 
 
@@ -39,7 +39,7 @@ public class Invoice {
             dateOfCorrection = extractor.getDateOfInvoice()[CORRECTION_DATE];
 
             filenameBuilder
-                    .append(" (Korrektur ")
+                    .append(" (Korrektur in ")
                     .append(dateOfCorrection.getMonthOfYear())
                     .append(".")
                     .append(dateOfCorrection.getYear())

@@ -9,26 +9,29 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 
 public class MyApp extends Application {
 
-    private Path inputFile;
-    private Invoices invoices;
+    public static Path inputFile;
 
-    private List<Employee> employees = SharedEmployeeDatabase.getInstance().getDatabase();
+    private Invoices invoices;
 
     private ProgressBar progressBar;
 
     private final Label statusLabel = new Label("Status");
+
+    Button convertButton = new Button("Convert");
+
+    Button openButton = new Button("Open..");
 
     private void invokeConvertTask(){
         ConvertTask task = new ConvertTask(inputFile, invoices);
@@ -37,6 +40,10 @@ public class MyApp extends Application {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 statusLabel.setText(newValue);
+                openButton.setDisable(false);
+                SharedEmployeeDatabase.getInstance().getDatabase().clear();
+                progressBar.progressProperty().unbind();
+                progressBar.setProgress(0);
             }
         });
 
@@ -49,18 +56,17 @@ public class MyApp extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage){
 
         GridPane root = new GridPane();
         root.setHgap(20);
         root.setPadding(new Insets(10, 10 ,10 ,10));
 
         final FileChooser fileChooser = new FileChooser();
-        final File pdf;
 
 
         VBox vBox = new VBox();
-        vBox.setPrefWidth(210);
+        vBox.setPrefWidth(230);
         vBox.setAlignment(Pos.CENTER_LEFT);
         vBox.setSpacing(5);
 
@@ -81,10 +87,8 @@ public class MyApp extends Application {
 
         TableView<Employee> tableView = new TableView<>();
 
-        Button openButton = new Button("Open..");
         openButton.setMinWidth(65);
 
-        Button convertButton = new Button("Convert");
         convertButton.setPrefWidth(160);
         convertButton.setDisable(true);
 

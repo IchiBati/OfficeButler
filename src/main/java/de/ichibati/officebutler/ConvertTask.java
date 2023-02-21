@@ -28,7 +28,6 @@ public class ConvertTask extends Task<String> {
         for (Employee e : employees){
             e.invoicesToFile(inputFile);
             updateProgress(i++, employees.size());
-            Thread.sleep(100);
         }
 
         return "Status: Converting Invoices succeed";
